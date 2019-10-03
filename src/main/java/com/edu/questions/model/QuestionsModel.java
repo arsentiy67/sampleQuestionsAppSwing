@@ -11,4 +11,8 @@ public class QuestionsModel {
     public Questions getQuestions() {
         return questions;
     }
+
+    public void addQuestion(String question, String answer) {
+        questions.add(new Question(question, answer));
+    }
 }

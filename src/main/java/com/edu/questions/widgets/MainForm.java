@@ -14,7 +14,7 @@ public class MainForm extends JFrame {
 
     public MainForm() throws HeadlessException {
         model = QuestionsRepository.loadQuestions();
-        setSize(400, 400);
+        setSize(1200, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override
@@ -23,6 +23,19 @@ public class MainForm extends JFrame {
                 QuestionsRepository.saveQuestions(model);
             }
         });
+        init();
         setVisible(true);
+    }
+
+    private void init() {
+        setLayout(new BorderLayout());
+
+        ButtonsPanel buttonsPanel = new ButtonsPanel(model);
+        add(buttonsPanel, BorderLayout.WEST);
+
+        ContentPanel contentPanel = new ContentPanel(model);
+        add(contentPanel, BorderLayout.CENTER);
+
+        buttonsPanel.setContentShowListener(contentPanel.getContentShowListener());
     }
 }
